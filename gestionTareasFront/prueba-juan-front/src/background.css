@@ -1,0 +1,46 @@
+.contain {
+    background-color: #000;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    animation: blink 5s;
+  }
+  
+  @keyframes blink {
+    0% {
+      opacity: 0;
+    }
+    5% {
+      opacity: 0;
+    }
+    10% {
+      opacity: 0;
+    }
+    15% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .space {
+    width: var(--size);
+    height: var(--size);
+    box-shadow: var(--space-layer);
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.75; /* Opacidad inicial */
+    animation: moveStars var(--duration) linear infinite;
+    overflow: hidden;
+  }
+  
+  @keyframes moveStars {
+    from {
+      transform: translateY(0vh);
+    }
+    to {
+      transform: translateY(100vh);
+    }
+  }
