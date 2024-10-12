@@ -8,7 +8,7 @@ import {
   Post,
   Put,
   UseGuards,
-  Request 
+  Request,
 } from '@nestjs/common';
 import { TareasService } from './../services/tareas.service';
 import { CreateTareaDto } from '../dto/create-tarea.dto';
@@ -60,8 +60,18 @@ export class TareasController {
 
   @UseGuards(AuthGuard)
   @Delete(':idTarea')
-  delete(@Param('idTarea', ParseIntPipe) idTarea: number, @Request() req,) {
+  delete(@Param('idTarea', ParseIntPipe) idTarea: number, @Request() req) {
     console.log('Usuario autenticado:', req.usuario);
     return this.tareasService.delete(idTarea);
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('usuario/:id')
+  async obtenerTareasPorUsuario(
+    @Param('id') usuarioId: number,
+    @Request() req,
+  ) {
+    console.log('Usuario autenticado:', req.usuario);
+    return this.tareasService.getTareasPorUsuario(usuarioId);
   }
 }

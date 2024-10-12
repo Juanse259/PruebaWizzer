@@ -15,6 +15,23 @@ export class TareasService {
     @InjectRepository(User) private userRepo: Repository<User>,
   ) {}
 
+  async getTareasPorUsuario(usuarioId: number) {
+ 
+    const tareasUsuario = await this.tareasRepo.find({
+      where: { asignado: { idUsuario: usuarioId } },
+      relations: ['asignado', 'prioridad'],
+    });
+  
+    if (tareasUsuario.length === 0) {
+      throw new HttpException(
+        'No hay tareas para mostrar para este usuario',
+        HttpStatus.NOT_FOUND,
+      );
+    } else {
+      return tareasUsuario; 
+    }
+  }
+
   async getTarea() {
     const consulTarea = await this.tareasRepo.find({
       relations: ['asignado', 'prioridad'],
